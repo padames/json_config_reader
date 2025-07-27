@@ -1,0 +1,8 @@
+{
+  "settings": [
+    {"DATABASE_PORT": 5432},
+    {"MAX_CONNECTIONS": 100},
+    {"TIMEOUT_SECONDS": 30},
+    {"DEBUG_MODE": 1}
+  ]
+}

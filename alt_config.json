@@ -1,0 +1,8 @@
+{
+  "settings": [
+    { "SETTING A": 50 },
+    { "SETTING B": 75 },
+    { "SETTING C": 200 },
+    { "SETTING D": 42 }
+  ]
+}
