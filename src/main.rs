@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::env;
+use clap::{Arg, Command};
 use std::fs;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -29,15 +29,23 @@ impl Default for Config {
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    
-    let config = if args.len() > 1 {
-        let filename = &args[1];
+    let matches = Command::new("json_config_reader")
+        .version("0.1.0")
+        .arg(
+            Arg::new("file")
+                .short('f')
+                .long("file")
+                .value_name("FILE")
+                .help("Configuration file to read"),
+        )
+        .get_matches();
+
+    let config = if let Some(filename) = matches.get_one::<String>("file") {
         match read_config_from_file(filename) {
             Ok(config) => {
                 println!("Successfully loaded configuration from: {}", filename);
                 config
-            }
+            },
             Err(e) => {
                 eprintln!("Error reading config file '{}': {}", filename, e);
                 eprintln!("Using default configuration instead.");
